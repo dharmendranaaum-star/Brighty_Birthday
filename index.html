@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday, My Brighty 🌸</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose: #C8475C;
+    --rose-light: #f5c6ce;
+    --rose-pale: #fdf0f2;
+    --gold: #c9a84c;
+    --gold-light: #f5e8c7;
+    --cream: #fefaf6;
+    --dark: #2c1a1f;
+    --text: #4a2c35;
+    --muted: #9b7080;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: var(--sans);
+    overflow-x: hidden;
+  }
+
+  /* ── PETAL CANVAS ── */
+  #petals { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+    background: radial-gradient(ellipse at 50% 60%, #ffe4ec 0%, var(--cream) 70%);
+  }
+
+  .hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.4s ease forwards;
+  }
+
+  .hero-name {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 10vw, 7rem);
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--dark);
+    opacity: 0;
+    animation: fadeUp 1s 0.7s ease forwards;
+  }
+
+  .hero-name span {
+    color: var(--rose);
+    font-style: italic;
+  }
+
+  .hero-sub {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    color: var(--muted);
+    margin-top: 1rem;
+    opacity: 0;
+    animation: fadeUp 1s 1s ease forwards;
+  }
+
+  .hero-date {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    margin-top: 2rem;
+    opacity: 0;
+    animation: fadeUp 1s 1.3s ease forwards;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeIn 1s 2s ease forwards;
+  }
+
+  .scroll-hint span {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .scroll-arrow {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--rose-light), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  /* ── SECTION COMMON ── */
+  .section {
+    position: relative;
+    z-index: 1;
+    padding: 6rem 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    color: var(--dark);
+    line-height: 1.2;
+    margin-bottom: 2.5rem;
+  }
+
+  .section-title em { color: var(--rose); }
+
+  
+
+  /* ── LETTER ── */
+  .letter-card {
+    background: #fff;
+    border: 1px solid var(--rose-light);
+    border-radius: 2px;
+    padding: 3rem 2.5rem;
+    position: relative;
+    box-shadow: 0 4px 40px rgba(200,71,92,0.06);
+  }
+
+  .letter-card::before {
+    content: '\201C';
+    font-family: var(--serif);
+    font-size: 8rem;
+    color: var(--rose-light);
+    position: absolute;
+    top: -1.5rem;
+    left: 1.5rem;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .letter-text {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.15rem;
+    line-height: 1.9;
+    color: var(--text);
+  }
+
+  .letter-text p + p { margin-top: 1.25rem; }
+
+  .letter-sign {
+    margin-top: 2rem;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-align: right;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--rose-light), var(--gold-light), var(--rose-light));
+  }
+
+  .memory-item {
+    position: relative;
+    margin-bottom: 4rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .memory-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .memory-dot {
+    position: absolute;
+    left: -2.3rem;
+    top: 0.4rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--rose);
+    border: 3px solid var(--cream);
+    box-shadow: 0 0 0 1px var(--rose-light);
+  }
+
+  .memory-date {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .memory-title {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+  }
+
+  .memory-desc {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--muted);
+    max-width: 500px;
+    margin-bottom: 1rem;
+    text-align: justify;
+  }
+    
+
+  /* Photo placeholder */
+ 
+
+  .memory-photo {
+    width: 100%;
+    max-width: 500px;
+    height: 350px;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+
+  .memory-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+/*  .memory-photo:hover { border-color: var(--rose); }
+
+  .memory-photo input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+  }
+
+  .memory-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+  }
+
+  .photo-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    pointer-events: none;
+  }
+
+  .photo-icon {
+    width: 36px;
+    height: 36px;
+    opacity: 0.4;
+  }
+
+  .photo-label {
+    font-size: 0.78rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }*/
+
+  /* ── GALLERY ── */
+
+  .gallery-cell {
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+  .gallery-cell img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.75rem;
+  }  
+
+  .gallery-cell:hover { transform: scale(1.02); }
+
+
+  /* ── REASONS ── */
+  .reasons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .reason-card {
+    background: #fff;
+    border: 1px solid var(--rose-light);
+    border-radius: 4px;
+    padding: 1.5rem 1.25rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .reason-card:hover {
+    box-shadow: 0 8px 32px rgba(200,71,92,0.1);
+    transform: translateY(-2px);
+  }
+
+  .reason-num {
+    font-family: var(--serif);
+    font-size: 2rem;
+    color: var(--rose-light);
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .reason-text {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: var(--text);
+  }
+
+  /* ── CLOSING ── */
+  .closing {
+    text-align: center;
+    padding: 8rem 1.5rem;
+    background: radial-gradient(ellipse at 50% 40%, #ffe4ec 0%, var(--cream) 65%);
+    position: relative;
+    z-index: 1;
+  }
+
+  .closing-title {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    color: var(--dark);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  .closing-title em { color: var(--rose); font-style: italic; }
+
+  .closing-msg {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 480px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.8;
+  }
+
+  .big-heart {
+    display: inline-block;
+    font-size: 4rem;
+    animation: heartbeat 1.5s ease-in-out infinite;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0 auto 3rem;
+    max-width: 200px;
+  }
+
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rose-light);
+  }
+
+  .divider-icon { color: var(--rose); font-size: 0.8rem; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50%       { opacity: 1;   transform: scaleY(1.1); }
+  }
+
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    14%       { transform: scale(1.2); }
+    28%       { transform: scale(1); }
+    42%       { transform: scale(1.15); }
+    56%       { transform: scale(1); }
+  }
+
+  @keyframes petalFall {
+    0%   { transform: translateY(-20px) rotate(0deg); opacity: 0.9; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+
+  @media (max-width: 600px) {
+    .letter-card { padding: 2rem 1.25rem; }
+    .timeline { padding-left: 1.5rem; }
+    .memory-dot { left: -1.9rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="petals"></canvas>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">A day to remember and celebrate.</p>
+  <h1 class="hero-name">Happy Birthday,<br><span>Brighty 🌸</span></h1>
+  <p class="hero-sub">Today, my world feels a little brighter because you're in it.</p>
+  <p class="hero-date">✦ &nbsp; Sherin Brighty &nbsp; ✦ &nbsp; 24th June 2026 &nbsp; ✦</p>
+  <div class="scroll-hint">
+    <span>Our story</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- LETTER -->
+<div class="section">
+  <p class="section-label">A note for you</p>
+  <h2 class="section-title">From my heart<br>to <em>yours</em></h2>
+  <div class="letter-card">
+    <div class="letter-text">
+      <p>My love,</p>
+      <p>
+        This is the seventh birthday we're celebrating together, and if I'm being honest, I never imagined that you would become the best friend of my life.
+      </p>
+      <p>
+        More than lovers, we were friends first. We've had countless conversations, endless gossip sessions, random arguments, inside jokes that nobody else would understand, and so many moments of pure fun together. Through all these years, you've become the person I can talk to about absolutely anything.
+      </p>
+      <p>
+        To be frank, I never imagined I'd end up with a girl who has so much courage, so much energy, and just a tiny loose screw that makes her wonderfully unique. And I wouldn't change a single thing about it.
+      </p>
+      <p>
+        This little corner of the internet is made for you—a place to hold the memories of the people who love you most. From family and friends to the moments we've shared together, every photo and memory here tells a small part of your story and reminds you of how deeply you are loved.
+      </p>
+      <p>
+        Thank you for being exactly who you are. Happy Birthday.
+      </p>
+      <p>
+        And I'm so glad that I was born in the same time as you. I'm glad I didn't arrive decades before or after and miss the chance to know you. Out of all the moments in history, somehow I got lucky enough to find my own 11:11 in this lifetime
+      </p>
+      <p>
+        I love you.
+      </p>
+    </div>
+    <p class="letter-sign">— Always yours &nbsp;💌</p>
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<div class="section">
+  <p class="section-label">The People Who Love You ❤️</p>
+  <h2 class="section-title">A collection of<br><em>love and memories</em></h2>
+
+  <div class="timeline" id="timeline">
+
+    <div class="memory-item">
+      <div class="memory-dot"></div>
+      <p class="memory-date">The first Love of your Life</p>
+      <h3 class="memory-title">Dad and Mom ❤️</h3>
+      <p class="memory-desc">The person you are today is the masterpiece these two have spent a lifetime creating. Every value, every dream, every bit of kindness and strength in you carries a piece of them.
+        
+      They were the first light in your life, guiding your steps and helping you find your way. But somewhere along the journey, you became the brightest light in theirs—the reason behind their smiles, their pride, and the joy with which they see the world.
+
+      If they gave you life, you gave that life meaning.</p>
+      <div class="memory-photo" onclick="this.querySelector('input').click()">
+        <!---<input type="file" accept="image/*" onchange="loadPhoto(this)">
+        <img alt="Memory photo">
+        <div class="photo-placeholder">
+          <svg class="photo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="photo-label">Click to add a photo</span>
+        </div>--->
+        <div class="memory-photo">
+<<<<<<< HEAD
+          <img src="images/dad-and-mom.jpg" alt="Dad and Mom">
+=======
+          <img src="images/dadandmom.jpg" alt="Dad and Mom">
+>>>>>>> f38d33a (updated images / fixed UI / changes)
+        </div>
+      </div>
+    </div>
+
+    <div class="memory-item">
+      <div class="memory-dot"></div>
+      <p class="memory-date">Sharon 🌸</p>
+      <h3 class="memory-title">Our First Child</h3>
+      <p class="memory-desc">Sharon — the little one, and somehow the brightest one in the family.
+
+The love you have for her has always been beautiful to watch. The way you care for her, protect her, and celebrate every little thing she does makes me love her too.
+
+I still remember the first day I met her. She stood there with her little headband on, looking at me like I was the villain of the story. In her mind, her job was clear: protect her sister from this suspicious fellow who had suddenly appeared in her life.
+
+Even today, that memory makes me smile.
+
+She has always been your first line of defense, your biggest supporter, and the one who would fight the whole world for you without thinking twice. The bond you share is something truly special.
+
+And somewhere along the way, she became our first child too—the one we both worry about, tease endlessly, cheer for loudly, and love more than she'll ever know.</p>
+      <div class="memory-photo" onclick="this.querySelector('input').click()">
+        <!---<input type="file" accept="image/*" onchange="loadPhoto(this)">
+        <img alt="Memory photo">
+        <div class="photo-placeholder">
+          <svg class="photo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="photo-label">Click to add a photo</span>
+        </div>--->
+        <div class="memory-photo">
+          <img src="images/sharon.jpg" alt="Sharon">
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="section-label">Small Moments ❤️</p>
+      <div class="divider"><span class="divider-icon">✦</span></div>
+      <div class="gallery-grid">
+        <div class="gallery-cell">
+          <img src="images/Sharon/IMG-20260623-WA0155.jpg" alt="IMG-20260623-WA0155.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images/Sharon/IMG-20260623-WA0180.jpg" alt="IMG-20260623-WA0180.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images/Sharon/IMG-20260623-WA0181.jpg" alt="IMG-20260623-WA0181.jpg">
+        </div>
+      </div>
+    </div>
+
+    <div class="memory-item">
+      <div class="memory-dot"></div>
+      <p class="memory-date"></p>
+      <h3 class="memory-title">❤️ Renisha and Manisha ❤️</h3>
+      <p class="memory-desc">Some relationships are connected by blood, but some are connected by love.</p>
+      <p class="memory-desc">
+      Manisha and Renisha may be your cousins, but anyone who sees you together knows they are sisters in every way that truly matters. Through every stage of your life, they have stood beside you, wanting nothing but the very best for you. They have been your safe place, your support system, the shoulders you could cry on, and the people you could laugh with until your stomach hurt.
+      </p>
+      <p class="memory-desc">
+      What I admire most is the way they celebrate your happiness as if it were their own. They have always wanted to see you succeed, grow, and become everything you dream of being.
+      </p>
+      <p class="memory-desc">
+      And somehow, they welcomed me too.
+      </p>
+      <p class="memory-desc">
+      Even though I was an outsider, they treated me with kindness, warmth, and a generosity I'll never forget. I still remember how, whenever we went out together, they would never let us pay and would always put us before themselves. Those small acts of love spoke volumes about the kind of people they are.
+      </p>
+      <p class="memory-desc">
+      There is one memory that will always stay with me. While my father paid for my two years at Anna University, it was Renisha who paid my entrance fee. It may have seemed like a small gesture to some, but to me it was an act of faith, support, and family.
+      </p>
+      <p class="memory-desc">
+      And then we have Hemanth Anna—your "Mama" and my Anna. The way he loves and supports Renisha is something I genuinely admire. Watching them together is a reminder of what it means to be fully committed to the person you love. Their journey is beautiful, and I couldn't be happier for them.
+      </p>
+      <p class="memory-desc">
+      And yes, I am already waiting for the day I get to hold little Kutty Renishem in my arms.
+      </p>
+      <p class="memory-desc">
+      More than anything, I want to thank you. Because through you, I gained not just a partner, but an entire family filled with kind hearts, warm smiles, and unconditional love.
+      </p>
+      <p class="memory-desc">
+      Thank you for bringing these wonderful people into my life.
+      </p>
+      <div class="memory-photo" onclick="this.querySelector('input').click()">
+        <!---<input type="file" accept="image/*" onchange="loadPhoto(this)">
+        <img alt="Memory photo">
+        <div class="photo-placeholder">
+          <svg class="photo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="photo-label">Click to add a photo</span>
+        </div>--->
+        <div class="memory-photo">
+          <img src="images/ren_man.jpg" alt="Renisha and Manisha"> 
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="section-label">Small Moments ❤️</p>
+      <div class="divider"><span class="divider-icon">✦</span></div>
+      <div class="gallery-grid">
+        <div class="gallery-cell">
+          <img src="images\manis_renish\IMG-20260623-WA0060.jpg" alt="IMG-20260623-WA0060.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\manis_renish\IMG-20260623-WA0062.jpg" alt="IMG-20260623-WA0062.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\manis_renish\IMG-20260623-WA0064.jpg" alt="IMG-20260623-WA0064.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\manis_renish\IMG-20260623-WA0065.jpg" alt="IMG-20260623-WA0065.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\manis_renish\IMG-20260623-WA0066.jpg" alt="IMG-20260623-WA0066.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\manis_renish\IMG-20260623-WA0083.jpg" alt="IMG-20260623-WA0083.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\manis_renish\IMG-20260623-WA0090.jpg" alt="IMG-20260623-WA0090.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\manis_renish\IMG-20260623-WA0095.jpg" alt="IMG-20260623-WA0095.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\manis_renish\IMG-20260623-WA0118.jpg" alt="IMG-20260623-WA0118.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\manis_renish\IMG-20260623-WA0122.jpg" alt="IMG-20260623-WA0122.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\manis_renish\IMG-20260623-WA0126.jpg" alt="IMG-20260623-WA0126.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\manis_renish\IMG-20260623-WA0130.jpg" alt="IMG-20260623-WA0130.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\manis_renish\IMG-20260623-WA0132.jpg" alt="IMG-20260623-WA0132.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\manis_renish\IMG-20260623-WA0134.jpg" alt="IMG-20260623-WA0134.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\manis_renish\IMG-20260623-WA0137.jpg" alt="IMG-20260623-WA0137.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\manis_renish\IMG-20260623-WA0138.jpg" alt="IMG-20260623-WA0138.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\manis_renish\IMG-20260623-WA0139.jpg" alt="IMG-20260623-WA0139.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\manis_renish\IMG-20260623-WA0143.jpg" alt="IMG-20260623-WA0143.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\manis_renish\IMG-20260623-WA0147.jpg" alt="IMG-20260623-WA0147.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\manis_renish\IMG-20260623-WA0148.jpg" alt="IMG-20260623-WA0148.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\manis_renish\IMG-20260623-WA0157.jpg" alt="IMG-20260623-WA0157.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\manis_renish\IMG-20260623-WA0164.jpg" alt="IMG-20260623-WA0164.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\manis_renish\IMG-20260623-WA0166.jpg" alt="IMG-20260623-WA0166.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\manis_renish\IMG-20260623-WA0168.jpg" alt="IMG-20260623-WA0168.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\manis_renish\IMG-20260623-WA0170.jpg" alt="IMG-20260623-WA0170.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\manis_renish\IMG-20260623-WA0171.jpg" alt="IMG-20260623-WA0171.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\manis_renish\IMG-20260623-WA0173.jpg" alt="IMG-20260623-WA0173.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\manis_renish\IMG-20260623-WA0174.jpg" alt="IMG-20260623-WA0174.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\manis_renish\IMG-20260623-WA0176.jpg" alt="IMG-20260623-WA0176.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\manis_renish\IMG-20260623-WA0183.jpg" alt="IMG-20260623-WA0183.jpg">
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="memory-item">
+      <div class="memory-dot"></div>
+      <p class="memory-date">Three in One</p>
+      <h3 class="memory-title">The Unstoppable Trio 😄</h3>
+      <p class="memory-desc">Curina, Avril, and you—the bond you three share is truly something special. I've seen the love, care, and loyalty you have for each other, and honestly, there were moments when it even made me a little jealous.
+      </p>
+      <p class="memory-desc">
+      Long before I entered your life, the three of you were already creating memories together, standing by each other through every high and low. I know how much Curina and Avril have supported you during some of the hardest days of your life, and how they've always been there whenever you needed them.
+      </p>
+      <p class="memory-desc">
+      When it comes to your friends, I've learned one thing for sure—you would stand against the whole world for the people you love. Even against me if needed. Although, to be fair, I think I am your whole world... so I should be safe. 😜
+      </p>
+      <p class="memory-desc">
+      Jokes aside, seeing the three of you together reminds me how lucky you are to have friends who genuinely care for you, celebrate your victories, and hold your hand through the difficult days.
+      </p>
+      <p class="memory-desc">
+      I'm truly happy that you have these wonderful souls in your life, and I'm grateful that through you, I got the chance to know them too.
+      </p>
+      <div class="memory-photo" onclick="this.querySelector('input').click()">
+        <!---<input type="file" accept="image/*" onchange="loadPhoto(this)">
+        <img alt="Memory photo">
+        <div class="photo-placeholder">
+          <svg class="photo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="photo-label">Click to add a photo</span>
+        </div>--->
+        <div class="memory-photo">
+          <img src="images/Trio.jpg" alt="Trio"> 
+        </div>
+      </div>
+    </div>
+
+    <div class="memory-item">
+      <div class="memory-dot"></div>
+      <p class="memory-date">Now Me</p>
+      <h3 class="memory-title">Finally You and Me </h3>
+      <p class="memory-desc">My Favorite Chapter ❤️
+      </p>
+      <p class="memory-desc">
+      Thank you for being with me all these years. We've been through countless arguments, silly fights, misunderstandings, and moments where we drove each other absolutely crazy. Yet somehow, through it all, we always found our way back to each other.
+      </p>
+      <p class="memory-desc">
+      I've had the privilege of celebrating two of your graduations with you, and while I'll miss the next two, I have a feeling that when the time comes, we won't be two anymore—we'll be three. ❤️
+      </p>
+      <p class="memory-desc">
+      I have always been proud of you and everything you have achieved. Every goal you reach, every challenge you overcome, and every step you take forward fills me with happiness. You inspire me more than you know.
+      </p>
+      <p class="memory-desc">
+      You are my motivation when I feel lost, my emotional support when life gets heavy, my biggest comfort, and one of the greatest blessings in my life. So much of my world revolves around you, and I wouldn't want it any other way.
+      </p>
+      <p class="memory-desc">
+      And one of the things I admire most about you is the way you treat my family as your own. The love, respect, and care you show them means more to me than I can ever put into words.
+      </p>
+      <p class="memory-desc">
+      Watching you laugh with them, support them, and make them feel loved fills me with a kind of happiness that is hard to describe. It makes me feel like the luckiest man in the world because the people I love the most have found a place in your heart, just as you have found a place in theirs.
+      </p>
+      <p class="memory-desc">
+      That alone makes me feel like I'm on top of the world.
+      </p>
+      <p class="memory-desc">
+      I am truly blessed to have you as my girl.
+      </p>
+      <p class="memory-desc">
+      And finally, thank you God.
+      </p>
+      <p class="memory-desc">
+      And thank you, Jerry and Vicky, for bringing this beautiful soul into the world and raising the woman I fell in love with.
+      </p>
+      <p class="memory-desc">
+      I love you, today and always.
+      </p>
+    </div>
+    <div class="memory-photo" onclick="this.querySelector('input').click()">
+        <!---<input type="file" accept="image/*" onchange="loadPhoto(this)">
+        <img alt="Memory photo">
+        <div class="photo-placeholder">
+          <svg class="photo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="photo-label">Click to add a photo</span>
+        </div>--->
+        <div class="memory-photo">
+          <img src="images/me_and_you.jpg" alt="me_and_you"> 
+        </div>
+    </div>
+
+
+    <div class="section">
+      <p class="section-label">Small Moments ❤️</p>
+      <div class="divider"><span class="divider-icon">✦</span></div>
+      <div class="gallery-grid">
+      <div class="gallery-cell">
+          <img src="images\me_and_Brig\IMG_20231105_131604.jpg" alt="IMG_20231105_131604.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\me_and_Brig\IMG_20231216_194515.jpg" alt="IMG_20231216_194515.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\me_and_Brig\IMG_20231231_202336.jpg" alt="IMG_20231231_202336.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\me_and_Brig\IMG_20240925_162456.jpg" alt="IMG_20240925_162456.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\me_and_Brig\IMG_20240925_162634.jpg" alt="IMG_20240925_162634.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\me_and_Brig\IMG_20250209_165816.jpg" alt="IMG_20250209_165816.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\me_and_Brig\IMG_20250214_160114.jpg" alt="IMG_20250214_160114.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\me_and_Brig\IMG_20250214_160318.jpg" alt="IMG_20250214_160318.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\me_and_Brig\IMG_20250214_160451.jpg" alt="IMG_20250214_160451.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\me_and_Brig\IMG_20250214_160846.jpg" alt="IMG_20250214_160846.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\me_and_Brig\IMG_20250214_161154.jpg" alt="IMG_20250214_161154.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\me_and_Brig\IMG_20250214_161827.jpg" alt="IMG_20250214_161827.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\me_and_Brig\IMG_20250214_182533.jpg" alt="IMG_20250214_182533.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\me_and_Brig\IMG_20250214_183418.jpg" alt="IMG_20250214_183418.jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\me_and_Brig\Media (10).jpg" alt="Media (10).jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\me_and_Brig\Media (2).jpg" alt="Media (2).jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\me_and_Brig\Media (3).jpg" alt="Media (3).jpg">
+        </div>
+        <div class="gallery-cell">
+          <img src="images\me_and_Brig\Media (9).jpg" alt="Media (9).jpg">
+        </div>
+      </div>
+    </div>
+  
+
+
+<!-- GALLERY -->
+<div class="section">
+  <p class="section-label">Some Moments with our friends ❤️</p>
+  <h2 class="section-title">A Little <em>Gallery</em></h2>
+  <div class="divider"><span class="divider-icon">✦</span></div>
+
+  <div class="gallery-grid">
+  <div class="gallery-cell">
+    <img src="images\other_friends\20240405_163603.jpg" alt="20240405_163603.jpg">
+  </div>
+  <div class="gallery-cell">
+    <img src="images\other_friends\IMG_20230922_145619.jpg" alt="IMG_20230922_145619.jpg">
+  </div>
+  <div class="gallery-cell">
+    <img src="images\other_friends\IMG_20230922_145648.jpg" alt="IMG_20230922_145648.jpg">
+  </div>
+  <div class="gallery-cell">
+    <img src="images\other_friends\IMG_20231201_145732.jpg" alt="IMG_20231201_145732.jpg">
+  </div>
+  </div>
+</div>
+
+
+<section class="closing">
+  <h2 class="closing-title">
+    My Wish Came True,<br>
+    <em>and it was you</em>
+  </h2>
+
+  <p class="closing-msg">
+    If I could relive this life a thousand times,
+    I would still search for you in every one of them.
+  </p>
+
+  <p class="closing-msg">
+    Thank you for seven beautiful birthdays,
+    countless memories, endless laughter,
+    and a love that still feels like home.
+  </p>
+
+  <p class="closing-msg">
+    Out of billions of people,
+    across all the years and all the possibilities,
+    somehow our paths crossed.
+    And that will always be my favorite story.
+  </p>
+
+  <p class="closing-msg">
+    Happy Birthday, Brighty.
+    My favorite person.
+    My best friend.
+    My 11:11. ❤️
+  </p>
+
+  <div class="big-heart">💕</div>
+</section>
+
+<script>
+/* ── PETAL ANIMATION ── */
+const canvas = document.getElementById('petals');
+const ctx = canvas.getContext('2d');
+let petals = [];
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const shapes = ['🌸', '🌺', '✿', '❀'];
+
+class Petal {
+  constructor() { this.reset(true); }
+  reset(initial = false) {
+    this.x = Math.random() * canvas.width;
+    this.y = initial ? Math.random() * canvas.height * -1 : -20;
+    this.size = 12 + Math.random() * 12;
+    this.speed = 0.6 + Math.random() * 1.2;
+    this.drift = (Math.random() - 0.5) * 0.8;
+    this.rot = Math.random() * Math.PI * 2;
+    this.rotSpeed = (Math.random() - 0.5) * 0.04;
+    this.opacity = 0.4 + Math.random() * 0.5;
+    this.char = shapes[Math.floor(Math.random() * shapes.length)];
+  }
+  update() {
+    this.y += this.speed;
+    this.x += this.drift;
+    this.rot += this.rotSpeed;
+    if (this.y > canvas.height + 40) this.reset();
+  }
+  draw() {
+    ctx.save();
+    ctx.globalAlpha = this.opacity;
+    ctx.font = `${this.size}px serif`;
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.rot);
+    ctx.fillText(this.char, -this.size / 2, this.size / 2);
+    ctx.restore();
+  }
+}
+
+for (let i = 0; i < 28; i++) petals.push(new Petal());
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  petals.forEach(p => { p.update(); p.draw(); });
+  requestAnimationFrame(animate);
+}
+animate();
+
+/* ── SCROLL REVEAL ── */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.memory-item').forEach(el => observer.observe(el));
+
+/* ── PHOTO LOADERS ── */
+function loadPhoto(input) {
+  if (!input.files[0]) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const container = input.closest('.memory-photo');
+    const img = container.querySelector('img');
+    const placeholder = container.querySelector('.photo-placeholder');
+    img.src = e.target.result;
+    img.style.display = 'block';
+    placeholder.style.display = 'none';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+function loadGallery(input) {
+  if (!input.files[0]) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const cell = input.closest('.gallery-cell');
+    const img = cell.querySelector('img');
+    const label = cell.querySelector('.gallery-add');
+    img.src = e.target.result;
+    img.style.display = 'block';
+    if (label) label.style.display = 'none';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+</script>
+</body>
+</html>
